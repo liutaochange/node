@@ -24,5 +24,27 @@ router.post('/login', function(req, res, next) {
     }
   });
 });
-
+//注册
+router.post('/sign', function(req, res, next) {
+  var md5 = crypto.createHash('md5');
+  var password = md5.update(req.body.password).digest('base64');
+  handler(req, res, "user", {name: req.body.username,phone : req.body.phone,password:password},function(data){
+    console.log(data)
+    if(data.length!==0){
+      req.session.username = req.body.username;   //存session
+      req.session.phone = req.body.phone;
+      req.session.password = password;
+      res.end('{"success":"true"}');
+    }else{
+      //res.end('{"err":"抱歉，此账号已被占用"}');
+      res.end('{"err":"sorry，This account has been occupied"}');
+    }
+  });
+});
+//退出
+router.post('/logout', function(req, res, next) {
+  req.session.username = ""; //清除session
+  req.session.password = "";
+  res.end('{"success":"true"}');
+});
 module.exports = router;

@@ -11,6 +11,7 @@ var Urls = 'mongodb://localhost:27017/node';
 //add一条数据
 var add = function(db,collections,selector,fn){
     var collection = db.collection(collections);
+    console.log(selector)
     collection.insertMany([selector],function(err,result){
         try{
             assert.equal(err,null)
@@ -85,6 +86,7 @@ var methodType = {
     //  请求---> 根据传入进来的请求 数据库操作
     //  req.query    req.body
     show:find, //后台部分
+    sign:add,
     add:add,
     update:updates,
     delete:deletes,

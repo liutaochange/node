@@ -13,3 +13,9 @@ export const login = (userName,password) => request.post(API.login,{
   "username": userName,
   "password": password
 });
+//注册
+export const sign = (userName,phone,password) => request.post(API.sign,{
+  "username": userName,
+  "phone":phone,
+  "password": password
+});

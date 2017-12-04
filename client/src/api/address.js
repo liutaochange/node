@@ -3,5 +3,6 @@
  */
 export default {
   //login
-  login: '/users/login'
+  login: '/users/login',
+  sign:'/users/sign'
 }
